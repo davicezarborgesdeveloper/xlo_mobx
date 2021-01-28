@@ -2,31 +2,41 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:xlo_mobx/stores/create_store.dart';
 import 'package:xlo_mobx/stores/zip_store.dart';
 
 class ZipField extends StatelessWidget {
-  final ZipStore zipStore = ZipStore();
+  ZipField(this.createStore) : zipStore = createStore.zipStore;
+
+  final CreateStore createStore;
+  final ZipStore zipStore;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TextFormField(
-          onChanged: zipStore.setZip,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            CepInputFormatter()
-          ],
-          decoration: InputDecoration(
-            labelText: 'CEP *',
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.w800,
-              color: Colors.grey,
-              fontSize: 18,
-            ),
-            contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
-          ),
+        Observer(
+          builder: (_) {
+            return TextFormField(
+              onChanged: zipStore.setZip,
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                CepInputFormatter()
+              ],
+              decoration: InputDecoration(
+                errorText: createStore.addressError,
+                labelText: 'CEP *',
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.grey,
+                  fontSize: 18,
+                ),
+                contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+              ),
+            );
+          },
         ),
         Observer(
           builder: (_) {
