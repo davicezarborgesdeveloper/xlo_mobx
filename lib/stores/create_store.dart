@@ -47,7 +47,7 @@ abstract class _CreateStore with Store {
   void setDescription(String value) => description = value;
 
   @computed
-  bool get descriptionValid => title.length >= 10;
+  bool get descriptionValid => description.length >= 10;
   String get descriptionError {
     if (!showErrors || descriptionValid)
       return null;
@@ -142,6 +142,9 @@ abstract class _CreateStore with Store {
   @observable
   String error;
 
+  @observable
+  Ad savedAd;
+
   @action
   Future<void> _send() async {
     final ad = Ad();
@@ -156,7 +159,7 @@ abstract class _CreateStore with Store {
 
     loading = true;
     try {
-      final response = await AdRepository().save(ad);
+      savedAd = await AdRepository().save(ad);
     } catch (e) {
       error = e;
     }
