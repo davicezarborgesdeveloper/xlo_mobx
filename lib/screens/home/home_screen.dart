@@ -1,31 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:xlo_mobx/components/custom_drawer/custom_drawer.dart';
+import 'package:xlo_mobx/screens/home/components/top_bar.dart';
+import 'package:xlo_mobx/stores/home_store.dart';
 
 import 'components/search_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
+  final HomeStore homeStore = GetIt.I<HomeStore>();
   @override
   Widget build(BuildContext context) {
     openSearch(BuildContext context) async {
       final search = await showDialog(
           context: context,
           builder: (_) => SearchDialog(
-                currentSearch: 'Davi Borges',
+                currentSearch: homeStore.search,
               ));
-      print(search);
+      if (search != null) homeStore.setSearch(search);
     }
 
     return SafeArea(
       child: Scaffold(
         drawer: CustomDrawer(),
         appBar: AppBar(
+          title: Observer(
+            builder: (_) {
+              if (homeStore.search.isEmpty) return Container();
+              return GestureDetector(
+                onTap: () => openSearch(context),
+                child: LayoutBuilder(
+                  builder: (_, contraints) {
+                    return Container(
+                      width: contraints.biggest.width,
+                      child: Text(homeStore.search),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
           actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                openSearch(context);
-              },
-            )
+            Observer(builder: (_) {
+              if (homeStore.search.isEmpty)
+                return IconButton(
+                  icon: Icon(Icons.search),
+                  onPressed: () {
+                    openSearch(context);
+                  },
+                );
+              else
+                return IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    homeStore.setSearch('');
+                  },
+                );
+            })
+          ],
+        ),
+        body: Column(
+          children: [
+            TopBar(),
           ],
         ),
       ),
