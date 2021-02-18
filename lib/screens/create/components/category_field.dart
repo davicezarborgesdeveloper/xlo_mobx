@@ -7,6 +7,7 @@ class CategoryField extends StatelessWidget {
   CategoryField(this.createStore);
 
   final CreateStore createStore;
+
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
@@ -39,11 +40,12 @@ class CategoryField extends StatelessWidget {
             trailing: Icon(Icons.keyboard_arrow_down),
             onTap: () async {
               final category = await showDialog(
-                  context: context,
-                  builder: (_) => CategoryScreen(
-                        showAll: false,
-                        selected: createStore.category,
-                      ));
+                context: context,
+                builder: (_) => CategoryScreen(
+                  showAll: false,
+                  selected: createStore.category,
+                ),
+              );
               if (category != null) {
                 createStore.setCategory(category);
               }
@@ -53,16 +55,15 @@ class CategoryField extends StatelessWidget {
             Container(
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(
-                    color: Colors.red,
-                  ),
-                ),
+                border: Border(top: BorderSide(color: Colors.red)),
               ),
               padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
               child: Text(
                 createStore.categoryError,
-                style: TextStyle(color: Colors.red, fontSize: 12),
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 12,
+                ),
               ),
             )
           else

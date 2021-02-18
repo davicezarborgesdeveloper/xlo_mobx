@@ -16,6 +16,7 @@ class IBGERepository {
         ..sort((UF a, UF b) =>
             a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     }
+
     const endpoint =
         'https://servicodados.ibge.gov.br/api/v1/localidades/estados';
 
@@ -24,18 +25,16 @@ class IBGERepository {
 
       preferences.setString('UF_LIST', json.encode(response.data));
 
-      final ufList = response.data.map<UF>((j) => UF.fromJson(j)).toList()
+      return response.data.map<UF>((j) => UF.fromJson(j)).toList()
         ..sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-
-      return ufList;
     } on DioError {
       return Future.error('Falha ao obter lista de Estados');
     }
   }
 
   Future<List<City>> getCityListFromApi(UF uf) async {
-    final endpoint =
-        "https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf.id}/municipios";
+    final String endpoint =
+        'http://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf.id}/municipios';
 
     try {
       final response = await Dio().get<List>(endpoint);

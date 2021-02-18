@@ -7,11 +7,13 @@ class VendorTypeField extends StatelessWidget {
   VendorTypeField(this.filter);
 
   final FilterStore filter;
+
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        SectionTitle("Tipo de anunciante"),
+        SectionTitle('Tipo de anunciante'),
         Observer(builder: (_) {
           return Wrap(
             runSpacing: 4,
@@ -28,24 +30,25 @@ class VendorTypeField extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  width: 130,
                   height: 50,
+                  width: 120,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                          color: filter.isTypeParticular
-                              ? Colors.purple
-                              : Colors.grey),
-                      color: filter.isTypeParticular
-                          ? Colors.purple
-                          : Colors.transparent),
+                    borderRadius: BorderRadius.circular(25),
+                    color: filter.isTypeParticular
+                        ? Colors.purple
+                        : Colors.transparent,
+                    border: Border.all(
+                      color:
+                          filter.isTypeParticular ? Colors.purple : Colors.grey,
+                    ),
+                  ),
                   alignment: Alignment.center,
                   child: Text(
                     'Particular',
                     style: TextStyle(
-                        color: filter.isTypeParticular
-                            ? Colors.white
-                            : Colors.black),
+                      color:
+                          filter.isTypeParticular ? Colors.white : Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -62,27 +65,30 @@ class VendorTypeField extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  width: 130,
                   height: 50,
+                  width: 130,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                          color: filter.isTypeProfessional
-                              ? Colors.purple
-                              : Colors.grey),
+                    borderRadius: BorderRadius.circular(25),
+                    color: filter.isTypeProfessional
+                        ? Colors.purple
+                        : Colors.transparent,
+                    border: Border.all(
                       color: filter.isTypeProfessional
                           ? Colors.purple
-                          : Colors.transparent),
+                          : Colors.grey,
+                    ),
+                  ),
                   alignment: Alignment.center,
                   child: Text(
                     'Profissional',
                     style: TextStyle(
-                        color: filter.isTypeProfessional
-                            ? Colors.white
-                            : Colors.black),
+                      color: filter.isTypeProfessional
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                   ),
                 ),
-              )
+              ),
             ],
           );
         }),

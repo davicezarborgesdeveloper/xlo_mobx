@@ -14,17 +14,19 @@ class PriceField extends StatelessWidget {
     return Expanded(
       child: TextFormField(
         decoration: InputDecoration(
-          prefixText: "R\$ ",
+          prefixText: 'R\$ ',
           border: OutlineInputBorder(),
           isDense: true,
           labelText: label,
         ),
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
-          RealInputFormatter(centavos: false),
+          RealInputFormatter(centavos: false)
         ],
         keyboardType: TextInputType.number,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(
+          fontSize: 16,
+        ),
         onChanged: (text) {
           onChanged(int.tryParse(text.replaceAll('.', '')));
         },

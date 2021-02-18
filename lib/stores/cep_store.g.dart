@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'zip_store.dart';
+part of 'cep_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,30 +8,30 @@ part of 'zip_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ZipStore on _ZipStore, Store {
-  Computed<String> _$clearZipComputed;
+mixin _$CepStore on _CepStore, Store {
+  Computed<String> _$clearCepComputed;
 
   @override
-  String get clearZip => (_$clearZipComputed ??=
-          Computed<String>(() => super.clearZip, name: '_ZipStore.clearZip'))
+  String get clearCep => (_$clearCepComputed ??=
+          Computed<String>(() => super.clearCep, name: '_CepStore.clearCep'))
       .value;
 
-  final _$zipAtom = Atom(name: '_ZipStore.zip');
+  final _$cepAtom = Atom(name: '_CepStore.cep');
 
   @override
-  String get zip {
-    _$zipAtom.reportRead();
-    return super.zip;
+  String get cep {
+    _$cepAtom.reportRead();
+    return super.cep;
   }
 
   @override
-  set zip(String value) {
-    _$zipAtom.reportWrite(value, super.zip, () {
-      super.zip = value;
+  set cep(String value) {
+    _$cepAtom.reportWrite(value, super.cep, () {
+      super.cep = value;
     });
   }
 
-  final _$addressAtom = Atom(name: '_ZipStore.address');
+  final _$addressAtom = Atom(name: '_CepStore.address');
 
   @override
   Address get address {
@@ -46,7 +46,7 @@ mixin _$ZipStore on _ZipStore, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_ZipStore.error');
+  final _$errorAtom = Atom(name: '_CepStore.error');
 
   @override
   String get error {
@@ -61,7 +61,7 @@ mixin _$ZipStore on _ZipStore, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_ZipStore.loading');
+  final _$loadingAtom = Atom(name: '_CepStore.loading');
 
   @override
   bool get loading {
@@ -76,45 +76,45 @@ mixin _$ZipStore on _ZipStore, Store {
     });
   }
 
-  final _$_searchZipAsyncAction = AsyncAction('_ZipStore._searchZip');
+  final _$_searchCepAsyncAction = AsyncAction('_CepStore._searchCep');
 
   @override
-  Future<void> _searchZip() {
-    return _$_searchZipAsyncAction.run(() => super._searchZip());
+  Future<void> _searchCep() {
+    return _$_searchCepAsyncAction.run(() => super._searchCep());
   }
 
-  final _$_ZipStoreActionController = ActionController(name: '_ZipStore');
+  final _$_CepStoreActionController = ActionController(name: '_CepStore');
 
   @override
-  void setZip(String value) {
+  void setCep(String value) {
     final _$actionInfo =
-        _$_ZipStoreActionController.startAction(name: '_ZipStore.setZip');
+        _$_CepStoreActionController.startAction(name: '_CepStore.setCep');
     try {
-      return super.setZip(value);
+      return super.setCep(value);
     } finally {
-      _$_ZipStoreActionController.endAction(_$actionInfo);
+      _$_CepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void _reset() {
     final _$actionInfo =
-        _$_ZipStoreActionController.startAction(name: '_ZipStore._reset');
+        _$_CepStoreActionController.startAction(name: '_CepStore._reset');
     try {
       return super._reset();
     } finally {
-      _$_ZipStoreActionController.endAction(_$actionInfo);
+      _$_CepStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-zip: ${zip},
+cep: ${cep},
 address: ${address},
 error: ${error},
 loading: ${loading},
-clearZip: ${clearZip}
+clearCep: ${clearCep}
     ''';
   }
 }

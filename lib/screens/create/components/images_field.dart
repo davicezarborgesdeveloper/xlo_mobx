@@ -80,9 +80,11 @@ class ImagesField extends StatelessWidget {
                       },
                       child: CircleAvatar(
                         radius: 44,
-                        backgroundImage: FileImage(
-                          createStore.images[index],
-                        ),
+                        backgroundImage: createStore.images[index] is File
+                            ? FileImage(
+                                createStore.images[index],
+                              )
+                            : NetworkImage(createStore.images[index]),
                       ),
                     ),
                   );
@@ -90,28 +92,25 @@ class ImagesField extends StatelessWidget {
             );
           }),
         ),
-        Observer(
-          builder: (_) {
-            if (createStore.imagesError != null)
-              return Container(
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: Colors.red,
-                    ),
-                  ),
+        Observer(builder: (_) {
+          if (createStore.imagesError != null)
+            return Container(
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: Colors.red)),
+              ),
+              padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
+              child: Text(
+                createStore.imagesError,
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 12,
                 ),
-                padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
-                child: Text(
-                  createStore.imagesError,
-                  style: TextStyle(color: Colors.red, fontSize: 12),
-                ),
-              );
-            else
-              return Container();
-          },
-        ),
+              ),
+            );
+          else
+            return Container();
+        })
       ],
     );
   }

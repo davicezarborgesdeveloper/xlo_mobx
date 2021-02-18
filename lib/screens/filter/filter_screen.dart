@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:xlo_mobx/screens/filter/components/order_by_field.dart';
-import 'package:xlo_mobx/screens/filter/components/price_range_field.dart';
-import 'package:xlo_mobx/screens/filter/components/vendor_type_field.dart';
 import 'package:xlo_mobx/stores/filter_store.dart';
 import 'package:xlo_mobx/stores/home_store.dart';
 
+import 'components/orderby_field.dart';
+import 'components/price_range_field.dart';
+import 'components/vendor_type_field.dart';
+
 class FilterScreen extends StatelessWidget {
-  final FilterStore filter = GetIt.I<HomeStore>().cloneFilter;
+  final FilterStore filter = GetIt.I<HomeStore>().clonedFilter;
+
   @override
   Widget build(BuildContext context) {
+    print('Filter: $filter');
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Filtrar Busca'),
@@ -37,22 +41,26 @@ class FilterScreen extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 16),
                     height: 50,
                     child: RaisedButton(
+                      color: Colors.orange,
+                      disabledColor: Colors.orange.withAlpha(120),
                       textColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      elevation: 0,
+                      child: Text(
+                        'FILTRAR',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                       onPressed: filter.isFormValid
                           ? () {
                               filter.save();
                               Navigator.of(context).pop();
                             }
                           : null,
-                      color: Colors.orange,
-                      disabledColor: Colors.orange.withAlpha(120),
-                      child: Text(
-                        'FLTRAR',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
                     ),
                   );
                 }),

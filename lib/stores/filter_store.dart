@@ -13,11 +13,12 @@ const VENDOR_TYPE_PROFESSIONAL = 1 << 1;
 class FilterStore = _FilterStore with _$FilterStore;
 
 abstract class _FilterStore with Store {
-  _FilterStore(
-      {this.orderBy = OrderBy.DATE,
-      this.vendoType = VENDOR_TYPE_PARTICULAR,
-      this.minPrice,
-      this.maxPrice});
+  _FilterStore({
+    this.orderBy = OrderBy.DATE,
+    this.minPrice,
+    this.maxPrice,
+    this.vendorType = VENDOR_TYPE_PARTICULAR,
+  });
 
   @observable
   OrderBy orderBy;
@@ -28,11 +29,11 @@ abstract class _FilterStore with Store {
   @observable
   int minPrice;
 
-  @observable
-  int maxPrice;
-
   @action
   void setMinPrice(int value) => minPrice = value;
+
+  @observable
+  int maxPrice;
 
   @action
   void setMaxPrice(int value) => maxPrice = value;
@@ -44,15 +45,16 @@ abstract class _FilterStore with Store {
           : null;
 
   @observable
-  int vendoType;
+  int vendorType;
 
   @action
-  void selectVendorType(int value) => vendoType = value;
-  void setVendorType(int type) => vendoType = vendoType | type;
-  void resetVendorType(int type) => vendoType = vendoType & ~type;
+  void selectVendorType(int value) => vendorType = value;
+  void setVendorType(int type) => vendorType = vendorType | type;
+  void resetVendorType(int type) => vendorType = vendorType & ~type;
+
   @computed
-  bool get isTypeParticular => (vendoType & VENDOR_TYPE_PARTICULAR) != 0;
-  bool get isTypeProfessional => (vendoType & VENDOR_TYPE_PROFESSIONAL) != 0;
+  bool get isTypeParticular => (vendorType & VENDOR_TYPE_PARTICULAR) != 0;
+  bool get isTypeProfessional => (vendorType & VENDOR_TYPE_PROFESSIONAL) != 0;
 
   @computed
   bool get isFormValid => priceError == null;
@@ -64,9 +66,9 @@ abstract class _FilterStore with Store {
   FilterStore clone() {
     return FilterStore(
       orderBy: orderBy,
-      vendoType: vendoType,
       minPrice: minPrice,
       maxPrice: maxPrice,
+      vendorType: vendorType,
     );
   }
 }

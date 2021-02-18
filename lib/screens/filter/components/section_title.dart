@@ -4,6 +4,7 @@ class SectionTitle extends StatelessWidget {
   SectionTitle(this.title);
 
   final String title;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

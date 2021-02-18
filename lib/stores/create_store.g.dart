@@ -37,13 +37,6 @@ mixin _$CreateStore on _CreateStore, Store {
       (_$categoryValidComputed ??= Computed<bool>(() => super.categoryValid,
               name: '_CreateStore.categoryValid'))
           .value;
-  Computed<bool> _$subjetcValidComputed;
-
-  @override
-  bool get subjetcValid =>
-      (_$subjetcValidComputed ??= Computed<bool>(() => super.subjetcValid,
-              name: '_CreateStore.subjetcValid'))
-          .value;
   Computed<Address> _$addressComputed;
 
   @override
@@ -296,7 +289,6 @@ imagesValid: ${imagesValid},
 titleValid: ${titleValid},
 descriptionValid: ${descriptionValid},
 categoryValid: ${categoryValid},
-subjetcValid: ${subjetcValid},
 address: ${address},
 price: ${price},
 formValid: ${formValid},

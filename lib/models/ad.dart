@@ -1,28 +1,16 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:xlo_mobx/models/address.dart';
 import 'package:xlo_mobx/models/category.dart';
-import 'package:xlo_mobx/models/city.dart';
 import 'package:xlo_mobx/models/uf.dart';
 import 'package:xlo_mobx/models/user.dart';
 import 'package:xlo_mobx/repositories/table_keys.dart';
 import 'package:xlo_mobx/repositories/user_repository.dart';
 
+import 'city.dart';
+
 enum AdStatus { PENDING, ACTIVE, SOLD, DELETED }
 
 class Ad {
-  String id;
-  List images;
-  String title;
-  String description;
-  Category category;
-  Address address;
-  num price;
-  bool hidePhone;
-  AdStatus status = AdStatus.PENDING;
-  DateTime created;
-  User user;
-  int views;
-
   Ad.fromParse(ParseObject object) {
     id = object.objectId;
     title = object.get<String>(keyAdTitle);
@@ -42,5 +30,27 @@ class Ad {
     status = AdStatus.values[object.get<int>(keyAdStatus)];
     user = UserRepository().mapParseToUser(object.get<ParseUser>(keyAdOwner));
   }
+
   Ad();
+
+  String id;
+
+  List images = [];
+
+  String title;
+  String description;
+
+  Category category;
+
+  Address address;
+
+  num price;
+  bool hidePhone = false;
+
+  AdStatus status = AdStatus.PENDING;
+  DateTime created;
+
+  User user;
+
+  int views;
 }

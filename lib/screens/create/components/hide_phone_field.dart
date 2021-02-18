@@ -6,6 +6,7 @@ class HidePhoneField extends StatelessWidget {
   HidePhoneField(this.createStore);
 
   final CreateStore createStore;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
